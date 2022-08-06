@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="szh.mapper.TblpowerMapper">
+    <select id="getPower" resultType="szh.bean.Tblpower">
+        select * from tblpower where powerId in
+        (select powerId from tblrolepower where roleId = #{roleId})
+    </select>
+    <select id="unAssPower" resultType="szh.bean.Tblpower">
+        select * from tblpower where parentId = 0 or powerId not in
+        (select powerId from tblrolepower where roleId = #{roleId})
+    </select>
+    <select id="getAssPower" resultType="szh.bean.Tblpower">
+        select * from tblpower where powerId in(select powerId from tblrolepower where roleId = #{roleId}) and parentId!=0
+    </select>
+    <select id="getUnAssPower" resultType="szh.bean.Tblpower">
+        select * from tblpower where powerId not in(select powerId from tblrolepower where roleId = #{roleId}) and parentId!=0
+    </select>
+</mapper>

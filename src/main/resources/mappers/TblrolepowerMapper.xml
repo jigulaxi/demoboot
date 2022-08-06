@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="szh.mapper.TblrolepowerMapper">
+    <insert id="addPower" parameterType="String">
+        insert into tblrolepower(roleId,powerId)
+        values (#{roleId},#{powerId})
+    </insert>
+    <delete id="reducePower" parameterType="String">
+        delete from tblrolepower
+        where roleId=#{roleId} and powerId=#{powerId}
+    </delete>
+    <insert id="addAllRolePower" parameterType="List">
+        insert into tblrolepower(roleId,powerId) values
+        <foreach collection="powerIdList" item="powerId" separator=",">
+            (#{roleId},#{powerId})
+        </foreach>
+    </insert>
+    <delete id="reduceAllRolePower" parameterType="List">
+        delete from tblrolepower where roleId=#{roleId} and powerId in
+        <foreach collection="powerIdList" item="powerId" separator="," open="(" close=")">
+            #{powerId}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="szh.mapper.TblStaffMapper">
+    <select id="login" resultType="szh.bean.Tblstaff">
+        select * from tblstaff where staffAcc=#{staffAcc} and staffPwd=#{staffPwd}
+    </select>
+    <select id="getStaffList" resultType="szh.bean.Tblstaff">
+        select * from tblstaff
+    </select>
+    <delete id="delStaff" parameterType="String">
+        delete from tblstaff where staffId=#{staffId}
+    </delete>
+    <update id="updStaff" parameterType="String">
+        update tblstaff set staffAcc=#{staffAcc},staffPwd=#{staffPwd},roleId=#{roleId},staffName=#{staffName},staffAdd=#{staffAdd} where staffId=#{staffId}
+    </update>
+
+</mapper>
